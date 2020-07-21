@@ -281,6 +281,9 @@ func (restore *MongoRestore) createCollectionWithCommand(session *mongo.Client, 
 	// If there is no error, the result doesnt matter
 	singleRes := session.Database(intent.DB).RunCommand(nil, command, nil)
 	if err := singleRes.Err(); err != nil {
+		if strings.Contains(err.Error(), "already exists") {
+			return nil
+		}
 		return fmt.Errorf("error running create command: %v", err)
 	}
 
