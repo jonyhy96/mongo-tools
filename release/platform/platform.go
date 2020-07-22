@@ -3,7 +3,7 @@ package platform
 import (
 	"fmt"
 
-	"github.com/mongodb/mongo-tools/release/env"
+	"github.com/jonyhy96/mongo-tools/release/env"
 )
 
 const (

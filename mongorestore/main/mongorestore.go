@@ -8,10 +8,10 @@
 package main
 
 import (
+	"github.com/jonyhy96/mongo-tools/mongorestore"
 	"github.com/mongodb/mongo-tools-common/log"
 	"github.com/mongodb/mongo-tools-common/signals"
 	"github.com/mongodb/mongo-tools-common/util"
-	"github.com/mongodb/mongo-tools/mongorestore"
 
 	"os"
 )

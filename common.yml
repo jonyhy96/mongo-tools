@@ -391,7 +391,7 @@ functions:
       bucket: mciuploads
       aws_key: ${aws_key}
       aws_secret: ${aws_secret}
-      local_file: src/github.com/mongodb/mongo-tools/bin/${tool}${extension}
+      local_file: src/github.com/jonyhy96/mongo-tools/bin/${tool}${extension}
       remote_file: mongo-tools/binaries/${build_id}/${edition|community}/${tool}${extension}
 
   "generate coverage html + text":
@@ -580,7 +580,7 @@ functions:
     params:
       aws_key: ${aws_key}
       aws_secret: ${aws_secret}
-      local_file: src/github.com/mongodb/mongo-tools/${coverage_pkg}/coverage_${coverage_pkg}.html
+      local_file: src/github.com/jonyhy96/mongo-tools/${coverage_pkg}/coverage_${coverage_pkg}.html
       remote_file: mongo-tools/coverage/${coverage_pkg}/${task_id}.html
       bucket: mciuploads
       permissions: public-read
@@ -593,7 +593,7 @@ functions:
     params:
       aws_key: ${aws_key}
       aws_secret: ${aws_secret}
-      local_file: src/github.com/mongodb/mongo-tools/${coverage_pkg}/coverage_${coverage_pkg}.txt
+      local_file: src/github.com/jonyhy96/mongo-tools/${coverage_pkg}/coverage_${coverage_pkg}.txt
       remote_file: mongo-tools/coverage/${coverage_pkg}/${task_id}.txt
       bucket: mciuploads
       permissions: public-read
@@ -696,7 +696,7 @@ functions:
     params:
       aws_key: ${aws_key}
       aws_secret: ${aws_secret}
-      local_file: src/github.com/mongodb/mongo-tools/bin/${tool}
+      local_file: src/github.com/jonyhy96/mongo-tools/bin/${tool}
       remote_file: mongo-tools/binaries/${build_id}/${edition|community}/${tool}${extension}
       bucket: mciuploads
       permissions: public-read
@@ -726,9 +726,9 @@ functions:
         aws_key: ${aws_key}
         aws_secret: ${aws_secret}
         local_files_include_filter:
-          - src/github.com/mongodb/mongo-tools/release.*
-          - src/github.com/mongodb/mongo-tools/*.deb
-          - src/github.com/mongodb/mongo-tools/*.rpm
+          - src/github.com/jonyhy96/mongo-tools/release.*
+          - src/github.com/jonyhy96/mongo-tools/*.deb
+          - src/github.com/jonyhy96/mongo-tools/*.rpm
         remote_file: mongo-tools/pkgs/${build_id}/
         content_type: application/octet-stream
         bucket: mciuploads
@@ -739,7 +739,7 @@ functions:
     # place so that they can be more easily downloaded by the sign task
     - command: archive.targz_pack
       params:
-        target: src/github.com/mongodb/mongo-tools/upload.tgz
+        target: src/github.com/jonyhy96/mongo-tools/upload.tgz
         source_dir: src/github.com/mongodb/mongo-tools
         include:
           - "./release.*"
@@ -749,7 +749,7 @@ functions:
       params:
         aws_key: ${aws_key}
         aws_secret: ${aws_secret}
-        local_file: src/github.com/mongodb/mongo-tools/upload.tgz
+        local_file: src/github.com/jonyhy96/mongo-tools/upload.tgz
         remote_file: mongo-tools/task/dist/${build_id}/all-release-artifacts.tgz
         content_type: application/x-gzip
         bucket: mciuploads
@@ -762,14 +762,14 @@ functions:
         aws_key: ${aws_key}
         aws_secret: ${aws_secret}
         remote_file: mongo-tools/task/dist/${build_id}/all-release-artifacts.tgz
-        extract_to: src/github.com/mongodb/mongo-tools/
+        extract_to: src/github.com/jonyhy96/mongo-tools/
         bucket: mciuploads
 
   "sign msi installer":
     - command: shell.exec
       type: system
       params:
-        working_dir: src/github.com/mongodb/mongo-tools/
+        working_dir: src/github.com/jonyhy96/mongo-tools/
         silent: true
         script: |
           echo "${signing_auth_token}" > ./signing_auth_token
@@ -778,7 +778,7 @@ functions:
       # We overwrite the existing release.msi with a signed version via --package-file-suffix ""
       type: system
       params:
-        working_dir: src/github.com/mongodb/mongo-tools/
+        working_dir: src/github.com/jonyhy96/mongo-tools/
         script: |
           if [ "${mongo_os}" = "osx" ]; then
               exit 0
@@ -796,7 +796,7 @@ functions:
   "sign macos zip":
     - command: shell.exec
       params:
-        working_dir: src/github.com/mongodb/mongo-tools/
+        working_dir: src/github.com/jonyhy96/mongo-tools/
         silent: false
         script: |
           set -o xtrace
@@ -839,7 +839,7 @@ functions:
     - command: shell.exec
       type: system
       params:
-        working_dir: src/github.com/mongodb/mongo-tools/
+        working_dir: src/github.com/jonyhy96/mongo-tools/
         silent: true
         script: |
           if [ "${mongo_os}" = "osx" ]; then
@@ -849,7 +849,7 @@ functions:
     - command: shell.exec
       type: system
       params:
-        working_dir: src/github.com/mongodb/mongo-tools/
+        working_dir: src/github.com/jonyhy96/mongo-tools/
         silent: false
         script: |
           if [ "${mongo_os}" = "osx" ]; then
@@ -872,14 +872,14 @@ functions:
     - command: shell.exec
       type: system
       params:
-        working_dir: src/github.com/mongodb/mongo-tools/
+        working_dir: src/github.com/jonyhy96/mongo-tools/
         silent: true
         script: |
           echo "${signing_auth_token}" > ./signing_auth_token
     - command: shell.exec
       type: system
       params:
-        working_dir: src/github.com/mongodb/mongo-tools/
+        working_dir: src/github.com/jonyhy96/mongo-tools/
         script: |
           if [ "${mongo_os}" = "osx" ]; then
               exit 0
@@ -905,9 +905,9 @@ functions:
         aws_key: ${aws_key}
         aws_secret: ${aws_secret}
         local_files_include_filter:
-          - src/github.com/mongodb/mongo-tools/release.*
-          - src/github.com/mongodb/mongo-tools/*.deb
-          - src/github.com/mongodb/mongo-tools/*.rpm
+          - src/github.com/jonyhy96/mongo-tools/release.*
+          - src/github.com/jonyhy96/mongo-tools/*.deb
+          - src/github.com/jonyhy96/mongo-tools/*.rpm
         remote_file: mongo-tools/task/sign/${build_id}/
         bucket: mciuploads
         permissions: public-read
@@ -932,7 +932,7 @@ functions:
       params:
         aws_key: ${aws_key}
         aws_secret: ${aws_secret}
-        local_file: src/github.com/mongodb/mongo-tools/release.json
+        local_file: src/github.com/jonyhy96/mongo-tools/release.json
         remote_file: mongo-tools/release/${build_id}/
         optional: true
         content_type: application/json
@@ -1104,10 +1104,10 @@ post:
     # attach.results works for jstests, gotest.parse_files for golang tests
   - command: attach.results
     params:
-      file_location: src/github.com/mongodb/mongo-tools/report.json
+      file_location: src/github.com/jonyhy96/mongo-tools/report.json
   - command: gotest.parse_files
     params:
-      files: ["src/github.com/mongodb/mongo-tools/testing_output/*.suite"]
+      files: ["src/github.com/jonyhy96/mongo-tools/testing_output/*.suite"]
   - command: shell.exec
     params:
       silent: true
@@ -1829,7 +1829,7 @@ tasks:
     - command: shell.exec
       type: test
       params:
-        working_dir: src/github.com/mongodb/mongo-tools/test/qa-tests
+        working_dir: src/github.com/jonyhy96/mongo-tools/test/qa-tests
         script: |
           set -x
           set -v
