@@ -91,7 +91,7 @@ func (restore *MongoRestore) RestoreIntents() Result {
 					}
 					if fileNeedsIOBuffer, ok := intent.BSONFile.(intents.FileNeedsIOBuffer); ok {
 						if ioBuf == nil {
-							ioBuf = make([]byte, db.MaxBSONSize)
+							ioBuf = make([]byte, 0, db.MaxBSONSize)
 						}
 						fileNeedsIOBuffer.TakeIOBuffer(ioBuf)
 					}
@@ -398,14 +398,24 @@ func (restore *MongoRestore) RestoreCollectionToDB(dbName, colName string,
 				SetOrdered(restore.OutputOptions.MaintainInsertionOrder)
 			bulk.SetBypassDocumentValidation(restore.OutputOptions.BypassDocumentValidation)
 			for rawDoc := range docChan {
-				if restore.objCheck {
-					result.Err = bson.Unmarshal(rawDoc, &bson.D{})
-					if result.Err != nil {
-						resultChan <- result
-						return
+				var temp = bson.D{}
+				result.Err = bson.Unmarshal(rawDoc, &temp)
+				if result.Err != nil {
+					resultChan <- result
+					return
+				}
+				filter := bson.D{}
+				for _, val := range temp {
+					if val.Key == "_id" {
+						filter = append(filter, val)
+						break
 					}
 				}
-				result.combineWith(NewResultFromBulkResult(bulk.InsertRaw(rawDoc)))
+				if filter != nil {
+					result.combineWith(NewResultFromBulkResult(bulk.SetUpsert(true).Replace(filter, temp)))
+				} else {
+					result.combineWith(NewResultFromBulkResult(bulk.InsertRaw(rawDoc)))
+				}
 				result.Err = db.FilterError(restore.OutputOptions.StopOnError, result.Err)
 				if result.Err != nil {
 					resultChan <- result
