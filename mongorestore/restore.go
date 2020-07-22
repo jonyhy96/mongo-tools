@@ -58,7 +58,7 @@ func NewResultFromBulkResult(result *mongo.BulkWriteResult, err error) Result {
 		return Result{}
 	}
 
-	nSuccess := result.InsertedCount
+	nSuccess := result.InsertedCount + result.MatchedCount + result.UpsertedCount
 	var nFailure int64
 
 	// if a write concern error is encountered, the failure count may be inaccurate.
