@@ -25,7 +25,6 @@ var (
 
 func main() {
 	trace.Start(os.Stderr)
-	defer trace.Stop()
 
 	log.SetWriter(os.Stdout)
 	opts, err := mongorestore.ParseOptions(os.Args[1:], VersionStr, GitCommit)
@@ -65,7 +64,7 @@ func main() {
 	} else {
 		log.Logvf(log.Always, "done")
 	}
-
+	trace.Stop()
 	if result.Err != nil {
 		os.Exit(util.ExitFailure)
 	}
