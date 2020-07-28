@@ -8,8 +8,6 @@
 package main
 
 import (
-	"runtime/trace"
-
 	"github.com/jonyhy96/mongo-tools/mongorestore"
 	"github.com/mongodb/mongo-tools-common/log"
 	"github.com/mongodb/mongo-tools-common/signals"
@@ -24,9 +22,6 @@ var (
 )
 
 func main() {
-	trace.Start(os.Stderr)
-
-	log.SetWriter(os.Stdout)
 	opts, err := mongorestore.ParseOptions(os.Args[1:], VersionStr, GitCommit)
 
 	if err != nil {
@@ -64,7 +59,6 @@ func main() {
 	} else {
 		log.Logvf(log.Always, "done")
 	}
-	trace.Stop()
 	if result.Err != nil {
 		os.Exit(util.ExitFailure)
 	}
