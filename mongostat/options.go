@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/mongodb/mongo-tools-common/options"
+	"github.com/jonyhy96/mongo-tools-common/options"
 	"github.com/jonyhy96/mongo-tools/mongostat/stat_consumer"
 )
 

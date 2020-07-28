@@ -8,10 +8,13 @@
 package main
 
 import (
+	"net/http"
+	_ "net/http/pprof"
+
+	"github.com/jonyhy96/mongo-tools-common/log"
+	"github.com/jonyhy96/mongo-tools-common/signals"
+	"github.com/jonyhy96/mongo-tools-common/util"
 	"github.com/jonyhy96/mongo-tools/mongorestore"
-	"github.com/mongodb/mongo-tools-common/log"
-	"github.com/mongodb/mongo-tools-common/signals"
-	"github.com/mongodb/mongo-tools-common/util"
 
 	"os"
 )
@@ -22,6 +25,9 @@ var (
 )
 
 func main() {
+	go func() {
+		panic(http.ListenAndServe("localhost:6060", nil))
+	}()
 	opts, err := mongorestore.ParseOptions(os.Args[1:], VersionStr, GitCommit)
 
 	if err != nil {

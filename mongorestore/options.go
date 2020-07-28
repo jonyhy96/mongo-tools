@@ -7,10 +7,10 @@
 package mongorestore
 
 import (
-	"github.com/mongodb/mongo-tools-common/db"
-	"github.com/mongodb/mongo-tools-common/log"
-	"github.com/mongodb/mongo-tools-common/options"
-	"github.com/mongodb/mongo-tools-common/util"
+	"github.com/jonyhy96/mongo-tools-common/db"
+	"github.com/jonyhy96/mongo-tools-common/log"
+	"github.com/jonyhy96/mongo-tools-common/options"
+	"github.com/jonyhy96/mongo-tools-common/util"
 
 	"fmt"
 )

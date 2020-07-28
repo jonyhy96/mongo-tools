@@ -14,9 +14,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mongodb/mongo-tools-common/db"
-	"github.com/mongodb/mongo-tools-common/log"
-	"github.com/mongodb/mongo-tools-common/options"
+	"github.com/jonyhy96/mongo-tools-common/db"
+	"github.com/jonyhy96/mongo-tools-common/log"
+	"github.com/jonyhy96/mongo-tools-common/options"
 	"github.com/jonyhy96/mongo-tools/mongostat/stat_consumer"
 	"github.com/jonyhy96/mongo-tools/mongostat/stat_consumer/line"
 	"github.com/jonyhy96/mongo-tools/mongostat/status"
