@@ -5,7 +5,7 @@ go 1.13
 require (
 	github.com/aws/aws-sdk-go v1.30.29
 	github.com/google/go-cmp v0.3.0
-	github.com/jonyhy96/mongo-tools-common v1.2.4-0.20200728111625-e5be22d66342
+	github.com/jonyhy96/mongo-tools-common v1.2.4-0.20200729051024-fae4c7e34150
 	github.com/mattn/go-runewidth v0.0.4 // indirect
 	github.com/nsf/termbox-go v0.0.0-20160718140619-0723e7c3d0a3
 	github.com/smartystreets/goconvey v1.6.1-0.20160205033552-bf58a9a12912

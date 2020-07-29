@@ -48,8 +48,8 @@ github.com/jmespath/go-jmespath v0.0.0-20180206201540-c2b33e8439af/go.mod h1:Nht
 github.com/jmespath/go-jmespath v0.3.0 h1:OS12ieG61fsCg5+qLJ+SsW9NicxNkg3b25OyT2yCeUc=
 github.com/jmespath/go-jmespath v0.3.0/go.mod h1:9QtRXoHjLGCJ5IBSaohpXITPlowMeeYCZ7fLUTSywik=
 github.com/joho/godotenv v1.3.0/go.mod h1:7hK45KPybAkOC6peb+G5yklZfMxEjkZhHbwpqxOKXbg=
-github.com/jonyhy96/mongo-tools-common v1.2.4-0.20200728111625-e5be22d66342 h1:q6iwbcRJs0H6BbKSw2uycM0Cn0eUIKFc45fylwm/qWY=
-github.com/jonyhy96/mongo-tools-common v1.2.4-0.20200728111625-e5be22d66342/go.mod h1:q5okzK4OZO/q4lbd0f68uXOj+y3csKAEotLEvV2EKOo=
+github.com/jonyhy96/mongo-tools-common v1.2.4-0.20200729051024-fae4c7e34150 h1:PZJvuwLujMEVE01BfGG/tJEldNjYU6LDzJXKLOC1ZfI=
+github.com/jonyhy96/mongo-tools-common v1.2.4-0.20200729051024-fae4c7e34150/go.mod h1:q5okzK4OZO/q4lbd0f68uXOj+y3csKAEotLEvV2EKOo=
 github.com/jtolds/gls v4.20.0+incompatible h1:xdiiI2gbIgH/gLH7ADydsJ1uDOEzR8yvV7C0MuV77Wo=
 github.com/jtolds/gls v4.20.0+incompatible/go.mod h1:QJZ7F/aHp+rZTRtaJ1ow/lLfFfVYBRgL+9YlvaHOwJU=
 github.com/karrick/godirwalk v1.8.0/go.mod h1:H5KPZjojv4lE+QYImBI8xVtrBRgYrIVsaRPx4tDPEn4=

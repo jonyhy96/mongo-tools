@@ -20,8 +20,13 @@ import (
 	"github.com/jonyhy96/mongo-tools-common/util"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
+
+type onlyID struct {
+	ID *primitive.ObjectID `bson:"_id"`
+}
 
 const insertBufferFactor = 16
 
@@ -398,21 +403,18 @@ func (restore *MongoRestore) RestoreCollectionToDB(dbName, colName string,
 				SetOrdered(restore.OutputOptions.MaintainInsertionOrder)
 			bulk.SetBypassDocumentValidation(restore.OutputOptions.BypassDocumentValidation)
 			for rawDoc := range docChan {
-				var temp = bson.D{}
-				result.Err = bson.Unmarshal(rawDoc, &temp)
+				var temp = new(onlyID)
+				result.Err = bson.Unmarshal(rawDoc, temp)
 				if result.Err != nil {
 					resultChan <- result
 					return
 				}
-				filter := bson.D{}
-				for _, val := range temp {
-					if val.Key == "_id" {
-						filter = append(filter, val)
-						break
-					}
+				var filter []byte
+				if temp.ID != nil {
+					filter, _ = bson.Marshal(temp)
 				}
 				if filter != nil {
-					result.combineWith(NewResultFromBulkResult(bulk.SetUpsert(true).Replace(filter, temp)))
+					result.combineWith(NewResultFromBulkResult(bulk.SetUpsert(true).Replace(filter, rawDoc)))
 				} else {
 					result.combineWith(NewResultFromBulkResult(bulk.InsertRaw(rawDoc)))
 				}
